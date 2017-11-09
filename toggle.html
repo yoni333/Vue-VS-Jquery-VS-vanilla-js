@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Easell</title>
+    <script src="./vue.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="" id="app">
+        <center>
+            <h1>
+
+                {{message}}
+
+            </h1>
+
+            <ul class="list-group">
+                <li class="list-group-item" v-for="(item ,index ) in names" v-bind:key="index" v-bind:class="{active:isActive[index]}" @click="toggle(index)">
+                    {{item}}
+
+
+
+                </li>
+
+            </ul>
+
+        </center>
+
+    </div>
+
+    <script>
+        app = new Vue({
+            el: "#app",
+            data: {
+
+                message: "toggle with direct change the arrays with Vue.set and passing params",
+
+                names: [
+                    "yoni", "ana", "yoram", "tami"
+                ],
+
+
+
+                isActive: []
+            },
+            created: function () {
+                //we can skip this - Vue.set know to handle it!
+                //     console.log(this.names.length);
+                //      this.isActive = new Array(this.names.length);
+            },
+            methods: {
+                toggle: function (index) {
+
+                    //  console.log('before' ,   this.isActive[index]);
+                    this.isActive.forEach(function (element, index, array) {
+                        console.log(array)
+                        console.log(index)
+                        console.log(element)
+                        Vue.set(array, index, false);
+                    }, this);
+                    Vue.set(this.isActive, index, !this.isActive[index]);
+                    //    console.log('after' ,   this.isActive[index])
+                }
+            }
+
+
+        })
+    </script>
+
+    <!-- watchers  -->
+    <div class="text-center" id="app2">
+
+        <h1>{{header}}</h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+
+                <input type="checkbox" id="jon" value="jon" v-model="checkedNames">
+                <label for="jon">jon</label>
+            </li>
+            <li class="list-group-item">
+
+                <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+                <label for="jack">jack</label>
+            </li>
+            <p> {{ checkedNames }} </p>
+
+        </ul>
+
+
+
+
+    </div>
+    <script>
+        var app2 = new Vue({
+            el: "#app2",
+            data: {
+                header: "watchers dont need vue.set",
+                checkedNames: []
+            },
+            watch: {
+                checkedNames: function (val) {
+                    console.log(this.checkedNames, val)
+                }
+            }
+
+        });
+    </script>
+
+
+
+</body>
+
+</html>

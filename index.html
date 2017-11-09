@@ -1,205 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="./vue.js"></script>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    
-    <link rel="stylesheet" href="./css/style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="./vue.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-       
-    <h1>vue app </h1>
 
-    <div class="chapter">example 1</div>
-    <ul>
-        <li>
-                <div  class="vue" id="app">{{message}}</div>
-                
-        </li>
-   
-        <li>
-                <div class="vanil" id="vanilla"></div>
-        </li>
-   
-         <li>
-                <div class="jquery" id="jquery"></div>
-         </li>
-   
-    </ul>
+        <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
 
-    <!-- example 2 -->
+                                <a class="navbar-brand" href="#">Vue.js meetup</a>
+                        </div>
 
-    <div class="chapter">example 2 change attribute</div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul id="navbarApp" class="nav navbar-nav">
 
-    <ul>
-        <li>
-                <div id="app2" class="vue">
-                    <span v-bind:title="message">
-                      Vue :   Hoover your mouse here
-                    </span>
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">chapter menu
+                                                        <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                        <li v-for="(title,index) in titles" v-on:click="toggle(index)">
+                                                                {{title}}
+                                                        </li>
+
+                                                </ul>
+                                        </li>
+                                </ul>
+
+
+                        </div>
+                        <!-- /.navbar-collapse -->
                 </div>
-                
-        </li>
-   
-        <li>
-                <div class="vanil" id="vanilla2">
-                        <span title="">
-                                Vanila :  Hoover your mouse here
-                        </span>
-                       
-                </div>
-        </li>
-   
-         <li>
-                <div class="jquery" id="jquery2">
-                        <span title="">
-                                Jquery :  Hoover your mouse here
-                        </span>
+                <!-- /.container-fluid -->
+        </nav>
 
-                </div>
-         </li>
+        <h1>vue app </h1>
 
-         <li> <p><a href="https://www.w3schools.com/tags/ref_standardattributes.asp">attribute list</a></p> </li>
-       
-    </ul>
-   
-      <!-- example 3 A -->
+        <div id="app" class="chapter" v-show="chapter[0]">example 1
+                <ul>
+                        <li>
+                                <div class="vue">{{message}} - {{meetup}}</div>
 
-      <div class="chapter">conditionals </div>
-      
-          <ul>
-              <li>
-                      <div id="app3" class="vue">
-                            <span  v-if="seen" >Vue Now you see me</span>
-                      </div>
-                      
-              </li>
-         
-              <li>
-                      <div class="vanil" id="vanilla3" hidden>vanila Now you see me
-                           
-                             
-                      </div>
-              </li>
-         
-               <li>
-                      <div class="jquery" id="jquery3" hidden>jquery Now you see me
-                          
-      
-                      </div>
-               </li>
-      
-          </ul>
+                        </li>
 
-            <!-- example 4 -->
+                        <li>
+                                <div class="vanil" id="vanilla"></div>
+                        </li>
 
-      <div class="chapter"> loops</div>
-      
-          <ul>
-              <li>
-                      <div id="app4" class="vue">
-                            <ol>
-                                    <li v-for="todo in todos">
-                                      {{ todo.text }}
-                                    </li>
-                                  </ol>
-                      </div>
-                      
-              </li>
-         
-              <li>
-                      <div class="vanil" id="vanilla4" >vanila Now you see me
-                           <ol></ol>
-                             
-                      </div>
-              </li>
-         
-               <li>
-                      <div class="jquery" id="jquery4" >jquery Now you see me
-                          <ol></ol>
-      
-                      </div>
-               </li>
-      
-          </ul>
+                        <li>
+                                <div class="jquery" id="jquery"></div>
+                        </li>
 
-          
-            <!-- example 5 -->
+                </ul>
 
-      <div class="chapter"> one direction event binding</div>
-      
-          <ul>
-              <li>
-                      <div id="app5" class="vue">
-                            <div>
-                                <p>{{message}}</p>
-                                <button v-on:click="reverseMessage">click to reverse</button>
-                            </div>
-                      </div>
-                      
-              </li>
-         
-              <li>
-                      <div class="vanil" id="vanilla5" >
-                            <div>
-                                    <p></p>
-                                    <button onClick="vanilla5.click()">click to reverse</button>
+                //vanila var vanil = document.getElementById("vanilla"); vanil.innerHTML = "vanilla here"; //jquery var jq = $("#jquery");
+                jq.text("jquery here");
+        </div>
+        <!-- example 2 -->
+
+        <div id="app2" class="chapter" v-show="chapter[1]">example 2 change attribute 11
+                <ul>
+                        <li>
+                                <div class="vue">
+                                        <span v-bind:title="message">
+                                                Vue : Hoover your mouse here
+                                        </span>
                                 </div>
-                             
-                      </div>
-              </li>
-         
-               <li>
-                      <div class="jquery" id="jquery5" >
-                            <div>
-                                    <p></p>
-                                    <button >click to reverse</button>
-                                </div>
-      
-                      </div>
-               </li>
-      
-          </ul>
 
-               <!-- example 6 -->
+                        </li>
 
-      <div class="chapter"> Two direction event binding</div>
-      
-          <ul>
-              <li>
-                      <div id="app6" class="vue">
-                            <div>
-                                <p>{{message}}</p>
-                                <input v-model="message"/>
-                            </div>
-                            <div>
-                                    <p>{{message2}}</p>
-                                    <input v-model="message2"/>
+                        <li>
+                                <div class="vanil" id="vanilla2">
+                                        <span title="">
+                                                Vanila : Hoover your mouse here
+                                        </span>
+
                                 </div>
-                      </div>
-                      
-              </li>
-         
-              <li>
-                      <div class="vanil" id="vanilla6" >
-                           for this we need observarble or complex code.from now and on we will use Vue
-                             
-                      </div>
-              </li>
-         
-               <li>
-                      <div class="jquery" id="jquery6" >
-                            for this we need observarble or complex code.from now and on we will use Vue
-                            
-      
-                      </div>
-               </li>
-      
-          </ul>
-    <script src="./script.js"></script>
+                        </li>
+
+                        <li>
+                                <div class="jquery" id="jquery2">
+                                        <span title="">
+                                                Jquery : Hoover your mouse here
+                                        </span>
+
+                                </div>
+                        </li>
+
+                        <li>
+                                <p>
+                                        <a href="https://www.w3schools.com/tags/ref_standardattributes.asp">attribute list</a>
+                                </p>
+                        </li>
+
+                </ul>
+                <pre>   
+//vanila
+vanil = document.getElementById("vanilla2");
+vanil.children[0].title = "vanila title here"
+vanil.querySelector('span').title= vanil.children[0].title + " with query selector";
+//jquery
+jq = $("#jquery2 > span");
+
+jq.prop("title","jquery title here");
+</pre>
+        </div>
+        <!-- example 3 A -->
+
+        <div id="app3" class="chapter" v-show="chapter[2]">conditionals
+
+                <ul>
+                        <li>
+                                <div class="vue">
+                                        <span v-if="toto">Vue Now you see me</span>
+                                </div>
+
+                        </li>
+
+                        <li>
+                                <div class="vanil" id="vanilla3" hidden>vanila Now you see me
+
+
+                                </div>
+                        </li>
+
+                        <li>
+                                <div class="jquery" id="jquery3" hidden>jquery Now you see me
+
+
+                                </div>
+                        </li>
+
+                </ul>
+                <pre>   
+//vanila
+vanil = document.getElementById("vanilla3");
+vanil.hidden=false;
+//jquery
+jq = $("#jquery3");
+
+jq.prop("hidden",false);
+</pre>
+        </div>
+        <!-- example 4 -->
+
+        <div id="app4" class="chapter" v-show="chapter[3]"> loops
+
+                <ul>
+                        <li>
+                                <div class="vue">
+                                        <ol>
+                                                <li v-for="todo in todos">
+                                                        {{ todo.text }}
+                                                </li>
+                                        </ol>
+                                </div>
+
+                        </li>
+
+                        <li>
+                                <div class="vanil" id="vanilla4">vanila Now you see me
+                                        <ol></ol>
+
+                                </div>
+                        </li>
+
+                        <li>
+                                <div class="jquery" id="jquery4">jquery Now you see me
+                                        <ol></ol>
+
+                                </div>
+                        </li>
+
+                </ul>
+                <pre>    
+//vanila
+var todos= [
+    { text: 'Learn JavaScript' },
+    { text: 'Learn Vue' },
+    { text: 'Build something awesome' }
+  ];
+
+vanil = document.getElementById("vanilla4");
+todos.forEach(function (obj){
+    var node = document.createElement("LI");                 // Create a <li> node
+    //var textnode = document.createTextNode(obj.text);         // Create a text node
+    //node.appendChild(textnode);                              // Append the text to <li>
+    node.innerText=obj.text;                              // Append the text to <li>
+   vanil.querySelector("ol").appendChild(node);     // Append <li> to <ol> 
+});
+
+//jquery
+jq = $("#jquery4 > ol ");
+$.each(todos,function(index,obj){
+
+    jq.append("<li>"+obj.text+"</li>");
+});
+</pre>
+        </div>
+
+        <!-- example 5 -->
+
+        <div id="app5" class="chapter" v-show="chapter[4]"> one direction event binding
+
+                <ul>
+                        <li>
+                                <div class="vue">
+                                        <div>
+                                                <p>{{message}}</p>
+                                                <button v-on:click="reverseMessage('aa')">click to reverse</button>
+                                        </div>
+                                </div>
+
+                        </li>
+
+                        <li>
+                                <div class="vanil" id="vanilla5">
+                                        <div>
+                                                <p></p>
+                                                <button onClick="vanilla5.click()">click to reverse</button>
+                                        </div>
+
+                                </div>
+                        </li>
+
+                        <li>
+                                <div class="jquery" id="jquery5">
+                                        <div>
+                                                <p></p>
+                                                <button>click to reverse</button>
+                                        </div>
+
+                                </div>
+                        </li>
+
+                </ul>
+                <pre>
+function vanilla_OBJ( element,text) {
+        
+            this.vanil5 =  document.getElementById(element);
+            this.v5p = this.vanil5.querySelector("p");
+            this.text= this.v5p.innerText = text;
+            this.click=function reverseMessage(){
+            
+                this.v5p.innerText =  this.v5p.innerText.split('').reverse().join('');
+            
+            }
+        
+        
+        }
+        vanilla5 = new vanilla_OBJ ( "vanilla5" , "vanilla reverse");
+        <br>
+        //jquery
+        jq5paragraph = $('#jquery5 p');
+        jq5paragraph.text("jquery reverse");
+        jq5button = $('#jquery5 button');
+        jq5button.click(function (){
+            jq5paragraph.text( jq5paragraph.text().split('').reverse().join('') ) ;
+        });
+</pre>
+
+        </div>
+        <!-- example 6 -->
+
+        <div id="app6" class="chapter" v-show="chapter[5]"> Two direction event binding
+
+                <ul>
+                        <li>
+                                <div class="vue">
+                                        <div>
+                                                <p>{{message}}</p>
+                                                <input v-model="message" />
+                                        </div>
+                                        <div>
+                                                <p>{{message2}}</p>
+                                                <input v-model="message2" />
+                                        </div>
+                                </div>
+
+                        </li>
+
+                        <li>
+                                <div class="vanil" id="vanilla6">
+                                        for this we need observarble or complex code.from now and on we will use Vue
+
+                                </div>
+                        </li>
+
+                        <li>
+                                <div class="jquery" id="jquery6">
+                                        for this we need observarble or complex code.from now and on we will use Vue
+
+
+                                </div>
+                        </li>
+
+                </ul>
+        </div>
+        <script src="./script.js"></script>
 </body>
+
 </html>

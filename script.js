@@ -1,7 +1,13 @@
+
 // first example 
+var chapter=new Array(6).fill(false)
 app= new Vue({
     el:'#app',
-    data:{message:"Vue here"}
+    data:{
+        message:"Vue here",
+        meetup:"hy- everyone",
+          chapter:chapter
+    }
 });
 
 //vanila
@@ -14,9 +20,12 @@ jq.text("jquery here");
 //example 2 attribute bind
 
 
-app= new Vue({
+app2= new Vue({
     el:'#app2',
-    data:{message:'You loaded this page on ' + new Date().toLocaleString()}
+    data:{
+        message:' on ' + new Date().toLocaleString()
+    , chapter:chapter
+    }
 });
 
 //vanila
@@ -34,7 +43,10 @@ jq.prop("title","jquery title here");
 
 app3= new Vue({
     el:'#app3',
-    data:{seen:true}
+    data:{
+        toto:true
+        , chapter:chapter
+    }
 });
 
 //vanila
@@ -49,11 +61,13 @@ jq.prop("hidden",false);
 var app4 = new Vue({
     el: '#app4',
     data: {
+        
       todos: [
         { text: 'Learn JavaScript' },
         { text: 'Learn Vue' },
         { text: 'Build something awesome' }
       ]
+      , chapter:chapter
     }
   })
 
@@ -87,9 +101,11 @@ var app5 = new Vue({
     el:"#app5",
     data:{
         message:"reverse text example"
+        , chapter:chapter
     },
     methods:{
-        reverseMessage:function(){
+        reverseMessage:function(a){
+            console.log(a)
             this.message = this.message.split('').reverse().join('');
         }
         
@@ -136,5 +152,35 @@ var  app6= new Vue(
        data:{
            message:"hello vue meetup",
            message2:"second 2 direction binding"
+           , chapter:chapter
         }
     });
+
+//navbar app
+
+var navbarApp = new Vue({
+    el:"#navbarApp",
+    data:{
+        titles:[
+            "strings template",
+            "HTML attribute binding",
+            "conditionals",
+            "loops",
+            "one direction event binding",
+            "two direction event binding"
+
+        ]
+        ,chapter:chapter
+    }
+    ,methods:{
+        toggle:function(index){
+            console.log(index)
+            this.chapter.forEach(function (element, index, array) {
+              
+                Vue.set(array, index, false);
+            }, this);
+            Vue.set (chapter,index ,!chapter[index])
+        }
+    }
+
+})
